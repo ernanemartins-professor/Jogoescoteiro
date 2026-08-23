@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 10%, rgba(16, 185, 129, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(250, 204, 21, 0.1), transparent 45%),
+    linear-gradient(180deg, #0b2818 0%, #08301f 50%, #06231a 100%);
+  background-attachment: fixed;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop { animation: pop 0.25s ease-out; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-floaty { animation: floaty 3s ease-in-out infinite; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.animate-shake { animation: shake 0.3s ease-in-out; }
+
+.card {
+  background: rgba(6, 40, 27, 0.7);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(16,185,129,0.4); border-radius: 6px; }

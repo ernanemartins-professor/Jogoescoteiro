@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/api/medals/route": "app/api/medals/route.js",
+  "/api/player/route": "app/api/player/route.js",
+  "/api/questions/route": "app/api/questions/route.js",
+  "/api/ranking/route": "app/api/ranking/route.js",
+  "/api/score/route": "app/api/score/route.js",
+  "/instrucoes/page": "app/instrucoes/page.js",
+  "/jogo/[territory]/page": "app/jogo/[territory]/page.js",
+  "/mapa/page": "app/mapa/page.js",
+  "/medalhas/page": "app/medalhas/page.js",
+  "/missoes/[id]/page": "app/missoes/[id]/page.js",
+  "/missoes/page": "app/missoes/page.js",
+  "/page": "app/page.js",
+  "/ranking/page": "app/ranking/page.js"
+}

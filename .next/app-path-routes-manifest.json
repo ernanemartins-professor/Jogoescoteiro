@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/health/route": "/api/health",
+  "/api/medals/route": "/api/medals",
+  "/api/player/route": "/api/player",
+  "/api/questions/route": "/api/questions",
+  "/api/ranking/route": "/api/ranking",
+  "/api/score/route": "/api/score",
+  "/instrucoes/page": "/instrucoes",
+  "/jogo/[territory]/page": "/jogo/[territory]",
+  "/mapa/page": "/mapa",
+  "/medalhas/page": "/medalhas",
+  "/missoes/[id]/page": "/missoes/[id]",
+  "/missoes/page": "/missoes",
+  "/page": "/",
+  "/ranking/page": "/ranking"
+}
