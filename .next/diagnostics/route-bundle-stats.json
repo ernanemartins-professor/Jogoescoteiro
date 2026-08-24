@@ -85,11 +85,11 @@
   },
   {
     "route": "/ranking",
-    "firstLoadUncompressedJsBytes": 524685,
+    "firstLoadUncompressedJsBytes": 524706,
     "firstLoadChunkPaths": [
       ".next\\static\\chunks\\01xlw8hd842-c.js",
       ".next\\static\\chunks\\0d3shmwh5_nmn.js",
-      ".next\\static\\chunks\\1334~tdyuly1d.js",
+      ".next\\static\\chunks\\133p4qow8_5rj.js",
       ".next\\static\\chunks\\00gq-v0e07i1q.js",
       ".next\\static\\chunks\\0pqt~8bl3ukh4.js",
       ".next\\static\\chunks\\02g3221oh~3le.js",

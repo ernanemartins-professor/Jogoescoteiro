@@ -9,6 +9,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@netlify/next": "^1.4.9",
+    "@netlify/plugin-nextjs": "^5.15.13",
+    "@supabase/supabase-js": "^2.112.4",
     "dotenv": "17.3.1",
     "drizzle-orm": "0.45.2",
     "next": "16.2.6",

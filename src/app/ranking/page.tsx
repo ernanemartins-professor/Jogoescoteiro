@@ -12,6 +12,7 @@ interface PatrolRank {
   total: number;
   members: number;
 }
+
 interface IndRank {
   id: number;
   name: string;
@@ -30,8 +31,10 @@ export default function RankingPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL; // pega da env
+
     const load = () => {
-      fetch("/api/ranking")
+      fetch(`${apiUrl}/ranking`)
         .then((r) => r.json())
         .then((d) => {
           setPatrols(d.patrols ?? []);
@@ -40,6 +43,7 @@ export default function RankingPage() {
         })
         .catch(() => setLoading(false));
     };
+
     load();
     const t = setInterval(load, 8000); // atualização em tempo real
     return () => clearInterval(t);
@@ -51,7 +55,9 @@ export default function RankingPage() {
     <main className="mx-auto max-w-2xl px-4 pb-16">
       <div className="pt-6 text-center">
         <h1 className="text-3xl font-black text-amber-300">⚜️ RANKING</h1>
-        <p className="text-sm text-emerald-300/80">A Grande Expedição · atualizado ao vivo</p>
+        <p className="text-sm text-emerald-300/80">
+          A Grande Expedição · atualizado ao vivo
+        </p>
       </div>
 
       <section className="mt-6">
@@ -85,7 +91,10 @@ export default function RankingPage() {
                 <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-emerald-950">
                   <div
                     className="h-full rounded-full transition-all"
-                    style={{ width: `${(p.total / maxTotal) * 100}%`, background: p.color }}
+                    style={{
+                      width: `${(p.total / maxTotal) * 100}%`,
+                      background: p.color,
+                    }}
                   />
                 </div>
               </div>
@@ -122,7 +131,9 @@ export default function RankingPage() {
                 </div>
                 <div className="text-[11px] text-emerald-400">{ind.patrolName}</div>
               </div>
-              <div className="text-right font-black text-amber-300">{ind.points}</div>
+              <div className="text-right font-black text-amber-300">
+                {ind.points}
+              </div>
             </div>
           ))}
         </div>
