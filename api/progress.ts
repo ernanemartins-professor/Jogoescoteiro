@@ -1,15 +1,16 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { db } from '../src/db/index'
-import { progress } from '../src/db/schema'
+import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/db/index'
+import { progress } from '@/db/schema'
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido' })
-  }
-
-  const { playerId, territory, completed, correct, total, meta } = req.body
-
+export async function POST(req: NextRequest) {
   try {
+    const body = await req.json()
+    const { playerId, territory, completed, correct, total, meta } = body
+
+    if (!playerId || !territory) {
+      return NextResponse.json({ error: 'playerId e territory são obrigatórios' }, { status: 400 })
+    }
+
     await db.insert(progress).values({
       playerId,
       territory,
@@ -19,8 +20,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       meta,
     })
 
-    return res.status(200).json({ message: 'Progresso registrado com sucesso!' })
+    return NextResponse.json({ message: 'Progresso registrado com sucesso!' }, { status: 200 })
   } catch (err: any) {
-    return res.status(500).json({ error: err.message })
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }

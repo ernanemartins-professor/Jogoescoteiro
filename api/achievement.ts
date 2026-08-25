@@ -1,22 +1,23 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { db } from '../src/db/index'
-import { achievements } from '../src/db/schema'
+import { NextRequest, NextResponse } from 'next/server'
+import { db } from '@/db/index'
+import { achievements } from '@/db/schema'
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Método não permitido' })
-  }
-
-  const { playerId, code } = req.body
-
+export async function POST(req: NextRequest) {
   try {
+    const body = await req.json()
+    const { playerId, code } = body
+
+    if (!playerId || !code) {
+      return NextResponse.json({ error: 'playerId e code são obrigatórios' }, { status: 400 })
+    }
+
     await db.insert(achievements).values({
       playerId,
       code,
     })
 
-    return res.status(200).json({ message: 'Conquista registrada com sucesso!' })
+    return NextResponse.json({ message: 'Conquista registrada com sucesso!' }, { status: 200 })
   } catch (err: any) {
-    return res.status(500).json({ error: err.message })
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }
