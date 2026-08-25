@@ -19,7 +19,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
 
     return res.status(200).json({ message: 'Jogador registrado com sucesso!' })
-  } catch (err: any) {
-    return res.status(500).json({ error: err.message })
-  }
+  } } catch (err: any) {
+  console.error('Erro detalhado:', err)
+  return res.status(500).json({ error: err.message })
+}
+
 }
