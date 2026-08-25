@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { db } from '../../src/db/index'
-import { players, achievements, progress } from '../../src/db/schema'
+import { players, achievements, progress } from '../../../src/db/schema'
 import { eq } from 'drizzle-orm'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
