@@ -3,8 +3,8 @@ import { db } from '@/db/index'
 import { players, achievements, progress } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
-  const id = params.id
+export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params  // <- aqui está a diferença
 
   if (!id) {
     return NextResponse.json({ error: 'ID do jogador é obrigatório' }, { status: 400 })
