@@ -1,29 +1,24 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/db/index'
 import { players, achievements, progress } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  const { id } = params
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+  const id = params.id
 
   if (!id) {
     return NextResponse.json({ error: 'ID do jogador é obrigatório' }, { status: 400 })
   }
 
   try {
-    // Dados básicos do jogador
     const playerData = await db.select().from(players).where(eq(players.id, Number(id)))
     if (playerData.length === 0) {
       return NextResponse.json({ error: 'Jogador não encontrado' }, { status: 404 })
     }
 
-    // Conquistas
     const playerAchievements = await db.select().from(achievements).where(eq(achievements.playerId, Number(id)))
-
-    // Progresso
     const playerProgress = await db.select().from(progress).where(eq(progress.playerId, Number(id)))
 
-    // Resposta formatada
     return NextResponse.json({
       profile: {
         id: playerData[0].id,
