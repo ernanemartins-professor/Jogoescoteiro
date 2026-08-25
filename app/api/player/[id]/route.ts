@@ -1,24 +1,20 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { NextResponse } from 'next/server'
 import { db } from '@/db/index'
 import { players, achievements, progress } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Método não permitido' })
-  }
-
-  const { id } = req.query
+export async function GET(req: Request, { params }: { params: { id: string } }) {
+  const { id } = params
 
   if (!id) {
-    return res.status(400).json({ error: 'ID do jogador é obrigatório' })
+    return NextResponse.json({ error: 'ID do jogador é obrigatório' }, { status: 400 })
   }
 
   try {
     // Dados básicos do jogador
     const playerData = await db.select().from(players).where(eq(players.id, Number(id)))
     if (playerData.length === 0) {
-      return res.status(404).json({ error: 'Jogador não encontrado' })
+      return NextResponse.json({ error: 'Jogador não encontrado' }, { status: 404 })
     }
 
     // Conquistas
@@ -28,7 +24,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const playerProgress = await db.select().from(progress).where(eq(progress.playerId, Number(id)))
 
     // Resposta formatada
-    return res.status(200).json({
+    return NextResponse.json({
       profile: {
         id: playerData[0].id,
         name: playerData[0].name,
@@ -53,6 +49,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }))
     })
   } catch (err: any) {
-    return res.status(500).json({ error: err.message })
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }
