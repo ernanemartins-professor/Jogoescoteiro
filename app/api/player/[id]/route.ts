@@ -5,9 +5,9 @@ import { eq } from "drizzle-orm";
 
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = context.params; // <- agora correto
+  const { id } = await context.params; // <- agora com await
 
   if (!id) {
     return NextResponse.json({ error: "ID do jogador é obrigatório" }, { status: 400 });
