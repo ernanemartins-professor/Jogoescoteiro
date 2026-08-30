@@ -1,9 +1,12 @@
 {
   "/_global-error/page": "/_global-error",
   "/_not-found/page": "/_not-found",
+  "/api/achievements/route": "/api/achievements",
   "/api/health/route": "/api/health",
   "/api/medals/route": "/api/medals",
+  "/api/player/[id]/route": "/api/player/[id]",
   "/api/player/route": "/api/player",
+  "/api/progress/route": "/api/progress",
   "/api/questions/route": "/api/questions",
   "/api/ranking/route": "/api/ranking",
   "/api/score/route": "/api/score",

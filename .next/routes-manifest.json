@@ -23,6 +23,14 @@
   },
   "dynamicRoutes": [
     {
+      "page": "/api/player/[id]",
+      "regex": "^/api/player/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/player/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
       "page": "/jogo/[territory]",
       "regex": "^/jogo/([^/]+?)(?:/)?$",
       "routeKeys": {
@@ -59,6 +67,12 @@
       "namedRegex": "^/_not\\-found(?:/)?$"
     },
     {
+      "page": "/api/achievements",
+      "regex": "^/api/achievements(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/achievements(?:/)?$"
+    },
+    {
       "page": "/api/health",
       "regex": "^/api/health(?:/)?$",
       "routeKeys": {},
@@ -75,6 +89,12 @@
       "regex": "^/api/player(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/api/player(?:/)?$"
+    },
+    {
+      "page": "/api/progress",
+      "regex": "^/api/progress(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/progress(?:/)?$"
     },
     {
       "page": "/api/questions",
