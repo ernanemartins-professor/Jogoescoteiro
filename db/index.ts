@@ -15,6 +15,7 @@ export const pool =
   globalForDb.__arenaNextJsPostgresqlPool ??
   new Pool({
     connectionString: databaseUrl,
+    ssl: { rejectUnauthorized: false }, // <- ESSENCIAL para Supabase
   });
 
 if (process.env.NODE_ENV !== "production") {
