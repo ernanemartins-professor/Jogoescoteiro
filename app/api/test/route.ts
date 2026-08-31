@@ -1,11 +1,9 @@
-import { db } from "@/db";
-import { sql } from "drizzle-orm";
+import { pool } from "@/db";
 
 export async function GET() {
   try {
-    // Teste básico de conexão
-    const result = await db.execute(sql`SELECT 1`);
-    return Response.json({ ok: true, result });
+    const result = await pool.query("SELECT 1");
+    return Response.json({ ok: true, result: result.rows });
   } catch (err) {
     if (err instanceof Error) {
       return Response.json({ error: err.message });
