@@ -6,6 +6,9 @@ export async function GET() {
     const result = await db.execute(sql`SELECT 1`);
     return Response.json({ ok: true, result });
   } catch (err) {
-    return Response.json({ error: err.message });
+    if (err instanceof Error) {
+      return Response.json({ error: err.message });
+    }
+    return Response.json({ error: String(err) });
   }
 }
