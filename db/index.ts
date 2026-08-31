@@ -22,4 +22,5 @@ if (process.env.NODE_ENV !== "production") {
   globalForDb.__arenaNextJsPostgresqlPool = pool;
 }
 
-export const db = drizzle(pool);
+export const db = drizzle(pool, { schema: "public" });
+
