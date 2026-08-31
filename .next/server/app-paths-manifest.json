@@ -2,6 +2,7 @@
   "/_global-error/page": "app/_global-error/page.js",
   "/_not-found/page": "app/_not-found/page.js",
   "/api/achievements/route": "app/api/achievements/route.js",
+  "/api/dbtest/route": "app/api/dbtest/route.js",
   "/api/health/route": "app/api/health/route.js",
   "/api/medals/route": "app/api/medals/route.js",
   "/api/player/[id]/route": "app/api/player/[id]/route.js",

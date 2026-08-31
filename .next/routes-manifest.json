@@ -73,6 +73,12 @@
       "namedRegex": "^/api/achievements(?:/)?$"
     },
     {
+      "page": "/api/dbtest",
+      "regex": "^/api/dbtest(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/dbtest(?:/)?$"
+    },
+    {
       "page": "/api/health",
       "regex": "^/api/health(?:/)?$",
       "routeKeys": {},
