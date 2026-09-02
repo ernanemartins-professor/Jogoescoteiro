@@ -1,7 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { db } from '@/db/index'
-import { progress } from '@/db/schema'
-import { eq } from 'drizzle-orm'
+import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
 export async function GET(req: NextRequest) {
   try {

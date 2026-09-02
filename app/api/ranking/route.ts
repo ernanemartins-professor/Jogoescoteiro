@@ -1,7 +1,6 @@
-import { db } from "@/db";
-import { players } from "@/db/schema";
-import { desc, sql } from "drizzle-orm";
-import { PATROLS, type PatrolKey } from "@/lib/gameData";
+import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
+
 
 export const dynamic = "force-dynamic";
 

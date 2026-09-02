@@ -1,7 +1,5 @@
-import { db } from "@/db";
-import { players, achievements, progress } from "@/db/schema";
-import { and, eq, sql } from "drizzle-orm";
-import { levelForPoints, MEDALS } from "@/lib/gameData";
+import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 

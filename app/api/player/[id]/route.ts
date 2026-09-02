@@ -1,38 +1,48 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/db/index";
-import { players, achievements, progress } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { supabase } from "@/lib/supabase";
 
 export async function GET(
   request: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: { id: string } }
 ) {
-  const { id } = await context.params; // <- agora com await
+  const { id } = context.params;
 
   if (!id) {
     return NextResponse.json({ error: "ID do jogador é obrigatório" }, { status: 400 });
   }
 
   try {
-    const playerData = await db.select().from(players).where(eq(players.id, Number(id)));
-    if (playerData.length === 0) {
+    const { data: playerData, error: playerError } = await supabase
+      .from("players")
+      .select("*")
+      .eq("id", Number(id))
+      .single();
+
+    if (playerError || !playerData) {
       return NextResponse.json({ error: "Jogador não encontrado" }, { status: 404 });
     }
 
-    const playerAchievements = await db.select().from(achievements).where(eq(achievements.playerId, Number(id)));
-    const playerProgress = await db.select().from(progress).where(eq(progress.playerId, Number(id)));
+    const { data: playerAchievements } = await supabase
+      .from("achievements")
+      .select("*")
+      .eq("playerId", Number(id));
+
+    const { data: playerProgress } = await supabase
+      .from("progress")
+      .select("*")
+      .eq("playerId", Number(id));
 
     return NextResponse.json({
       profile: {
-        id: playerData[0].id,
-        name: playerData[0].name,
-        patrol: playerData[0].patrol,
-        level: playerData[0].level,
-        points: playerData[0].points,
-        streak: playerData[0].streak,
+        id: playerData.id,
+        name: playerData.name,
+        patrol: playerData.patrol,
+        level: playerData.level,
+        points: playerData.points,
+        streak: playerData.streak,
       },
       stats: {
-        progress: playerProgress.map((p) => ({
+        progress: playerProgress?.map((p) => ({
           territory: p.territory,
           completed: p.completed,
           correct: p.correct,
@@ -41,7 +51,7 @@ export async function GET(
           updatedAt: p.updatedAt,
         })),
       },
-      achievements: playerAchievements.map((a) => ({
+      achievements: playerAchievements?.map((a) => ({
         code: a.code,
         createdAt: a.createdAt,
       })),

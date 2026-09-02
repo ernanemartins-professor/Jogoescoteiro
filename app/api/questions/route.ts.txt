@@ -1,5 +1,5 @@
-import { getServedQuestions } from "@/lib/questionBank";
-import { territoryById } from "@/lib/gameData";
+import { NextRequest, NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
